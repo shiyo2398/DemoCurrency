@@ -2,6 +2,7 @@ package com.shiyo.demo
 
 import com.shiyo.coreresources.base.BaseApplication
 import com.shiyo.coreresources.database.databaseModule
+import com.shiyo.featurecurrency.data.di.currencyListModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -16,6 +17,7 @@ class MyApplication : BaseApplication() {
             androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
             androidContext(this@MyApplication)
             modules(databaseModule)
+            modules(currencyListModule)
         }
     }
 }
