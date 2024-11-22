@@ -83,10 +83,9 @@ class CurrencyListViewModel(private val currencyUseCase: CurrencyUseCaseImpl) : 
 
     fun handleIntent(intent: CurrencyEvent) {
         viewModelScope.launch {
-            _state.value = CurrencyViewState.Loading
-
             when (intent) {
                 is CurrencyEvent.LoadAllCurrencyList -> {
+                    _state.value = CurrencyViewState.Loading
                     loadCurrencies { currencyUseCase.getAllList() }
                 }
 
