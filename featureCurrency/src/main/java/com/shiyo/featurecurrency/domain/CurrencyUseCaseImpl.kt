@@ -40,16 +40,7 @@ class CurrencyUseCaseImpl(private val currencyDao: CurrencyDao) : CurrencyReposi
     }
 
     override suspend fun insertData() {
-        currencyDao.clearData()
         currencyDao.insertCurrencies(cryptoCurrencyList + fiatCurrencyList)
-    }
-
-    override suspend fun getCryptoCurrencyList(): List<CurrencyInfoItem> {
-        return currencyDao.getCryptoCurrencies().toItemList()
-    }
-
-    override suspend fun getFiatCurrencyList(): List<CurrencyInfoItem> {
-        return currencyDao.getFiatCurrencies().toItemList()
     }
 
     override suspend fun getAllList(): List<CurrencyInfoItem> {

@@ -12,12 +12,6 @@ interface CurrencyDao {
     @Query("DELETE FROM currencies")
     suspend fun clearData()
 
-    @Query("SELECT * FROM currencies WHERE code = ''")
-    suspend fun getCryptoCurrencies(): List<CurrencyEntity>
-
-    @Query("SELECT * FROM currencies WHERE code != ''")
-    suspend fun getFiatCurrencies(): List<CurrencyEntity>
-
     @Query("SELECT * FROM currencies")
     suspend fun getAllCurrencies(): List<CurrencyEntity>
 }

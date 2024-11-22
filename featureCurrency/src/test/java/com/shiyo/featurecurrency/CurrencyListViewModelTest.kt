@@ -52,9 +52,9 @@ class CurrencyListViewModelTest {
     fun searchQueryMatchesStartWithCurrencyName() = runTest {
         // Mock the list of coins
         val coins = listOf(
-            CurrencyInfoItem(name = "Bitcoin", symbol = "BTC"),
-            CurrencyInfoItem(name = "Foobar", symbol = "FOO"),
-            CurrencyInfoItem(name = "Barfoo", symbol = "BAR")
+            CurrencyInfoItem(name = "Bitcoin", symbol = "BTC", id = "1"),
+            CurrencyInfoItem(name = "Foobar", symbol = "FOO", id = "2"),
+            CurrencyInfoItem(name = "Barfoo", symbol = "BAR", id = "3")
         )
         coEvery { useCase.getAllList() } returns coins
 
@@ -73,9 +73,9 @@ class CurrencyListViewModelTest {
     fun searchQueryMatchesWhenNameContainSpace() = runTest {
         // Mock the list of coins
         val coins = listOf(
-            CurrencyInfoItem(name = "Ethereum", symbol = "ETH"),
-            CurrencyInfoItem(name = "Ethereum Classic", symbol = "ETC"),
-            CurrencyInfoItem(name = "Tronclassic", symbol = "TRX")
+            CurrencyInfoItem(name = "Ethereum", symbol = "ETH", id = "1"),
+            CurrencyInfoItem(name = "Ethereum Classic", symbol = "ETC", id = "2"),
+            CurrencyInfoItem(name = "Tronclassic", symbol = "TRX", id = "3")
         )
         coEvery { useCase.getAllList() } returns coins
 
@@ -94,11 +94,11 @@ class CurrencyListViewModelTest {
     fun searchQueryMatchesStartWithCurrencySymbol() = runTest {
         // Mock the list of coins
         val coins = listOf(
-            CurrencyInfoItem(name = "Ethereum", symbol = "ETH"),
-            CurrencyInfoItem(name = "Ethereum Classic", symbol = "ETC"),
-            CurrencyInfoItem(name = "Electroneum", symbol = "ETN"),
-            CurrencyInfoItem(name = "Bitcoin", symbol = "BTC"),
-            CurrencyInfoItem(name = "Bettercoin", symbol = "BET")
+            CurrencyInfoItem(name = "Ethereum", symbol = "ETH", id = "1"),
+            CurrencyInfoItem(name = "Ethereum Classic", symbol = "ETC", id = "2"),
+            CurrencyInfoItem(name = "Electroneum", symbol = "ETN", id = "3"),
+            CurrencyInfoItem(name = "Bitcoin", symbol = "BTC", id = "4"),
+            CurrencyInfoItem(name = "Bettercoin", symbol = "BET", id = "5")
         )
         coEvery { useCase.getAllList() } returns coins
 
@@ -117,9 +117,9 @@ class CurrencyListViewModelTest {
     fun searchCurrenciesResultNotFound() = runTest {
         // Mock the list of coins
         val coins = listOf(
-            CurrencyInfoItem(name = "Bitcoin", symbol = "BTC"),
-            CurrencyInfoItem(name = "Ethereum", symbol = "ETH"),
-            CurrencyInfoItem(name = "Tronclassic", symbol = "TRX")
+            CurrencyInfoItem(name = "Bitcoin", symbol = "BTC", id = "1"),
+            CurrencyInfoItem(name = "Ethereum", symbol = "ETH", id = "2"),
+            CurrencyInfoItem(name = "Tronclassic", symbol = "TRX", id = "3")
         )
         coEvery { useCase.getAllList() } returns coins
 
