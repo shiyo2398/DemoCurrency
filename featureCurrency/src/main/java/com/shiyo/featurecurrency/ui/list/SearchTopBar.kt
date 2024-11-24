@@ -95,10 +95,6 @@ fun SearchTopBar(
             actionIconContentColor = Color.Gray
         )
     )
-
-    fun clearLocalSearch() {
-
-    }
 }
 
 @Preview(showBackground = true)
