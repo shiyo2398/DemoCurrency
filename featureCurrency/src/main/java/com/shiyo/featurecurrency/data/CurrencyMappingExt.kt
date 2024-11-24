@@ -21,7 +21,7 @@ fun Currency.toLocalEntity() =  CurrencyEntity(
     id = id,
     name = name,
     symbol = symbol,
-    code = code
+    code = code.orEmpty()
 )
 
 fun List<Currency>.toLocalEntityList() = map(Currency::toLocalEntity)
