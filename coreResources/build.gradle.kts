@@ -46,6 +46,7 @@ dependencies {
     api(libs.androidx.lifecycle.runtime.ktx)
     api(libs.koin)
     api(libs.timber)
+    api(libs.gson)
 
     //compose
     api(libs.androidx.material3)

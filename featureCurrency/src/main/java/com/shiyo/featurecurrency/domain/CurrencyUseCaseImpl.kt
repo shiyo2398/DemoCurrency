@@ -1,39 +1,30 @@
 package com.shiyo.featurecurrency.domain
 
+import android.content.Context
 import com.shiyo.coreresources.database.currency.CurrencyDao
 import com.shiyo.coreresources.database.currency.CurrencyEntity
+import com.shiyo.coreresources.util.JSONUtil
 import com.shiyo.featurecurrency.data.local.CurrencyInfoItem
 import com.shiyo.featurecurrency.data.repository.CurrencyRepository
 import com.shiyo.featurecurrency.data.toItemList
+import com.shiyo.featurecurrency.data.toLocalEntityList
 
-class CurrencyUseCaseImpl(private val currencyDao: CurrencyDao) : CurrencyRepository {
+class CurrencyUseCaseImpl(
+    private val context: Context,
+    private val currencyDao: CurrencyDao
+) : CurrencyRepository {
 
-    private val cryptoCurrencyList = listOf(
-        CurrencyEntity(id = "BTC", name = "Bitcoin", symbol = "BTC"),
-        CurrencyEntity(id = "ETH", name = "Ethereum", symbol = "ETH"),
-        CurrencyEntity(id = "XRP", name = "XRP", symbol = "XRP"),
-        CurrencyEntity(id = "BCH", name = "Bitcoin Cash", symbol = "BCH"),
-        CurrencyEntity(id = "LTC", name = "Litecoin", symbol = "LTC"),
-        CurrencyEntity(id = "EOS", name = "EOS", symbol = "EOS"),
-        CurrencyEntity(id = "BNB", name = "Binance Coin", symbol = "BNB"),
-        CurrencyEntity(id = "LINK", name = "Chainlink", symbol = "LINK"),
-        CurrencyEntity(id = "NEO", name = "NEO", symbol = "NEO"),
-        CurrencyEntity(id = "ETC", name = "Ethereum Classic", symbol = "ETC"),
-        CurrencyEntity(id = "ONT", name = "Ontology", symbol = "ONT"),
-        CurrencyEntity(id = "CRO", name = "Crypto.com Chain", symbol = "CRO"),
-        CurrencyEntity(id = "CUC", name = "Cucumber", symbol = "CUC"),
-        CurrencyEntity(id = "USDC", name = "USD Coin", symbol = "USDC")
-    )
+    private val currencyAssetResponse by lazy {
+        JSONUtil.parseCurrencyResponseFromAsset(context)
+    }
 
-    private val fiatCurrencyList = listOf(
-        CurrencyEntity(id = "SGD", name = "Singapore Dollar", symbol = "$", code = "SGD"),
-        CurrencyEntity(id = "EUR", name = "Euro", symbol = "€", code = "EUR"),
-        CurrencyEntity(id = "GBP", name = "British Pound", symbol = "£", code = "GBP"),
-        CurrencyEntity(id = "HKD", name = "Hong Kong Dollar", symbol = "$", code = "HKD"),
-        CurrencyEntity(id = "JPY", name = "Japanese Yen", symbol = "¥", code = "JPY"),
-        CurrencyEntity(id = "AUD", name = "Australian Dollar", symbol = "$", code = "AUD"),
-        CurrencyEntity(id = "USD", name = "United States Dollar", symbol = "$", code = "USD")
-    )
+    private val cryptoCurrencyList: List<CurrencyEntity> by lazy {
+        currencyAssetResponse?.crypto?.toLocalEntityList() ?: emptyList()
+    }
+
+    private val fiatCurrencyList: List<CurrencyEntity> by lazy {
+        currencyAssetResponse?.fiat?.toLocalEntityList() ?: emptyList()
+    }
 
     override suspend fun clearData() {
         currencyDao.clearData()
