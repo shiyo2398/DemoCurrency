@@ -34,6 +34,11 @@ fun SearchTopBar(
 ) {
     var searchQuery by remember { mutableStateOf("") }
 
+    fun clearSearchQuery() {
+        searchQuery = ""
+        onSearchQuery(searchQuery)
+    }
+
     TopAppBar(
         title = {
             Row(
@@ -44,6 +49,7 @@ fun SearchTopBar(
             ) {
                 IconButton(onClick = {
                     onNavigate.invoke(NavigationAction.NavigateBack)
+                    clearSearchQuery()
                 }) {
                     Icon(
                         Icons.AutoMirrored.Filled.ArrowBack,
@@ -70,8 +76,7 @@ fun SearchTopBar(
                     }
                 )
                 IconButton(onClick = {
-                    searchQuery = ""
-                    onSearchQuery.invoke(searchQuery)
+                    clearSearchQuery()
                 }) {
                     if (searchQuery.isNotEmpty()) {
                         Icon(
@@ -90,6 +95,10 @@ fun SearchTopBar(
             actionIconContentColor = Color.Gray
         )
     )
+
+    fun clearLocalSearch() {
+
+    }
 }
 
 @Preview(showBackground = true)
